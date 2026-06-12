@@ -1,0 +1,5 @@
+[repository]
+REGISTRY_NAME = "enter-your-github-registry-name-here"
+REPOSITORY_NAME = "nationgraph"
+REPOSITORY_LABEL = "enter-your-repository-label-here"
+VERSION = "0.1.0"
