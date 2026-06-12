@@ -1,0 +1,25 @@
+{
+    "name": "ImageFilterPiece",
+    "description": "Applies selected image filters to one or more images provided as a list of URLs, file paths, or base64 strings.",
+    "dependency": {
+        "requirements_file": "requirements_1.txt"
+    },
+    "container_resources": {
+        "requests": {
+            "cpu": 100,
+            "memory": 128
+        },
+        "limits": {
+            "cpu": 500,
+            "memory": 512
+        }
+    },
+    "tags": [
+        "Image",
+        "Filter"
+    ],
+    "style": {
+        "node_label": "Multi-Image Filter",
+        "icon_class_name": "ic:twotone-filter"
+    }
+}
