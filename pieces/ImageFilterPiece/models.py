@@ -43,7 +43,3 @@ class OutputModel(BaseModel):
         default=[],
         description="Base64-encoded strings of the filtered images (one per input image).",
     )
-
-
-class SecretsModel(BaseModel):
-    """ImageFilterPiece Secrets"""
