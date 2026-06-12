@@ -10,7 +10,6 @@ from PIL import Image
 
 from .models import InputModel, OutputModel
 
-
 filter_masks = {
     "sepia": ((0.393, 0.769, 0.189), (0.349, 0.686, 0.168), (0.272, 0.534, 0.131)),
     "black_and_white": (
@@ -30,7 +29,7 @@ filter_masks = {
 
 
 class ImageFilterPiece(BasePiece):
-    def piece_function(self, input_data: InputModel, secrets_data=None):
+    def piece_function(self, input_data: InputModel):
 
         # Build the list of filters to apply (same for every image)
         flags = [

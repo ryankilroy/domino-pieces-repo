@@ -1,25 +1,17 @@
-import base64
-from io import BytesIO
-
-from PIL import Image
-
 from domino.testing import piece_dry_run
 
-
-def _data_uri(color):
-    """Build a small in-memory PNG as a data URI so the test needs no network."""
-    img = Image.new("RGB", (16, 16), color)
-    buffer = BytesIO()
-    img.save(buffer, format="PNG")
-    b64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
-    return f"data:image/png;base64,{b64}"
+# Precomputed tiny 2x2 PNGs as base64 data URIs. Kept as constants so this test
+# module imports with no image libraries on the CI runner host — Pillow/numpy
+# only need to exist inside the piece's built image, where the piece actually runs.
+_RED_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGO8o6HBwMDAxAAGAA7uATD++YiCAAAAAElFTkSuQmCC"
+_BLUE_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEklEQVR4nGPU0LjDwMDAxAAGAA2GATBumJCjAAAAAElFTkSuQmCC"
 
 
 def test_imagefilterpiece():
     input_data = dict(
         image_urls=[
-            _data_uri((200, 50, 50)),
-            _data_uri((50, 50, 200)),
+            f"data:image/png;base64,{_RED_PNG}",
+            f"data:image/png;base64,{_BLUE_PNG}",
         ],
         black_and_white=True,
         cool=True,
@@ -29,7 +21,6 @@ def test_imagefilterpiece():
     output = piece_dry_run(
         piece_name="ImageFilterPiece",
         input_data=input_data,
-        secrets_data={},
     )
 
     assert len(output["out_image_paths"]) == 2
